@@ -2,7 +2,10 @@
     <h5 class="card-header">{{titulo}}</h5>
     <div class="card-body">
         <button class="btn btn-primary my-2" routerLink="/alumnos/form">Crear Nuevo</button>
-        <table class="table table-hover table-stiped">
+        <div class="alert alert-info" *ngIf="alumnos?.length===0">
+            No hay alumnos en el sistema
+        </div>
+        <table class="table table-hover table-stiped" *ngIf="alumnos?.length>0">
             <thead>
                 <tr>
                     <th>id</th>
@@ -28,5 +31,9 @@
                 </tr>
             </tbody>
         </table>
+        <div>
+            <mat-paginator [length]="totalRegistros" [pageIndex]="paginaActual" [pageSize]="totalPorPaginas" [pageSizeOptions]="pageSizeOptions" (page)="paginar($event)" showFirstLastButtons>
+            </mat-paginator>
+        </div>
     </div>
 </div>

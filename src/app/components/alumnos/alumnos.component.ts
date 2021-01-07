@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlumnoService } from '../../services/alumno.service';
 import { Alumno } from '../../models/alumno';
 import Swal from 'sweetalert2';
+import { element } from 'protractor';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -13,16 +15,38 @@ export class AlumnosComponent implements OnInit {
 
   titulo: string = 'Listado de Alumnos';
   alumnos: Alumno[];
+  totalRegistros: number = 0;
+  paginaActual: number = 0;
+  totalPorPaginas: number = 4;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
   constructor(private service: AlumnoService) {
     this.alumnos = [];
   }
 
   ngOnInit(): void {
-    this.service.listar().subscribe(
-      alumnos => this.alumnos = alumnos
+    this.calcularRangos();
+  }
+
+  paginar(event: PageEvent): void {
+    this.paginaActual = event.pageIndex;
+    this.totalPorPaginas = event.pageSize;
+    this.calcularRangos();
+  }
+
+  private calcularRangos(): void {
+    this.service.listarPagina(this.paginaActual.toString(), this.totalPorPaginas.toString()).subscribe(
+      p => {
+        this.alumnos = p.content as Alumno[];
+        this.totalRegistros = p.totalElements as number;
+        this.paginator._intl.itemsPerPageLabel = 'Registros por página';
+      }
     );
   }
+
 
   eliminar(alumno: Alumno): void {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -44,7 +68,8 @@ export class AlumnosComponent implements OnInit {
       if (result.isConfirmed) {
         this.service.eliminar(alumno.id).subscribe(
           () => {
-            this.alumnos = this.alumnos.filter(a => a !== alumno);
+            //this.alumnos = this.alumnos.filter(a => a !== alumno);
+            this.calcularRangos();
             swalWithBootstrapButtons.fire(
               'Eliminado!',
               'El alumno ha sido eliminado.',

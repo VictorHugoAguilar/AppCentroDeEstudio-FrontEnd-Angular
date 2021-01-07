@@ -11,6 +11,9 @@ import { LayoutModule } from './layout/layout.module';
 import { AlumnosFormComponent } from './components/alumnos/alumnos-form.component';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 
 @NgModule({
@@ -27,7 +30,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     LayoutModule,
     HttpClientModule,
     FormsModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

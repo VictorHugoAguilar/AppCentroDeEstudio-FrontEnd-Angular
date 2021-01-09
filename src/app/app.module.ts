@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { CursoFormComponent } from './components/cursos/curso-form.component';
 
 
 
@@ -23,6 +24,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CursosComponent,
     ExamenesComponent,
     AlumnosFormComponent,
+    CursoFormComponent,
   ],
   imports: [
     BrowserModule,

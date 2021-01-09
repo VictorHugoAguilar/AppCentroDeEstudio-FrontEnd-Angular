@@ -1,0 +1,24 @@
+<div class="card">
+    <h5 class="card-header">{{titulo}}</h5>
+    <div class="card-body">
+        <button class="btn btn-secondary my-2 " routerLink="/cursos"> Volver</button>
+
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del Alumno" aria-describedby="helpId" [(ngModel)]="model.nombre">
+                <small id="helpId" class="text-muted">Ingrese el nombre del curso</small>
+                <div class="alert alert-danger" *ngIf=" error?.nombre">{{error.nombre}}</div>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="button" class="btn btn-primary" (click)="model.id? editar():crear()">
+                  {{model.id? "Modificar" : "Crear Nuevo" }}
+              </button>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>

@@ -7,7 +7,7 @@ import { CommonService } from '../services/common.service';
 export abstract class CommonListarComponent<E extends Generic, S extends CommonService<E>> implements OnInit {
 
   protected nombreModel: string = '';
-  protected titulo: string = 'Listado de Alumnos';
+  protected titulo: string = '';
   lista: E[] = [];
   totalRegistros: number = 0;
   paginaActual: number = 0;

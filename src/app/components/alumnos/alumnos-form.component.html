@@ -7,29 +7,40 @@
 
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del Alumno" aria-describedby="helpId" [(ngModel)]="alumno.nombre">
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del Alumno" aria-describedby="helpId" [(ngModel)]="model.nombre">
                 <small id="helpId" class="text-muted">Ingrese el nombre del alumno</small>
                 <div class="alert alert-danger" *ngIf=" error?.nombre">{{error.nombre}}</div>
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido</label>
-                <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido del Alumno" aria-describedby="helpId" [(ngModel)]="alumno.apellido">
+                <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido del Alumno" aria-describedby="helpId" [(ngModel)]="model.apellido">
                 <small id="helpId" class="text-muted">Ingrese el Apellido del alumno</small>
                 <div class="alert alert-danger" *ngIf="error && error.apellido">{{error.apellido}}</div>
 
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email del Alumno" aria-describedby="helpId" [(ngModel)]="alumno.email">
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email del Alumno" aria-describedby="helpId" [(ngModel)]="model.email">
                 <small id="helpId" class="text-muted">Ingrese el Email del alumno</small>
                 <div class="alert alert-danger" *ngIf="error && error.email">{{error.email}}</div>
 
             </div>
+
+            <div class="form-group">
+                <label for="inputGroupFile01">Imagen Alumno</label>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                    <input type="file" class="form-control" id="inputGroupFile01" (change)="seleccionarFoto($event)">
+                </div>
+            </div>
+
             <div class="form-group mt-4">
-                <button type="button" class="btn btn-primary" (click)="alumno.id? editar():crear()">
-                    {{alumno.id? "Editar" : "Crear Nuevo" }}
+                <button type="button" class="btn btn-primary" (click)="model.id? editar():crear()">
+                    {{model.id? "Modificar" : "Crear Nuevo" }}
                 </button>
             </div>
+
+
         </form>
 
     </div>

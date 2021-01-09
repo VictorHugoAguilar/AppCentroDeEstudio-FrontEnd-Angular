@@ -1,14 +1,15 @@
 <div class="card">
-    <h5 class="card-header">{{titulo}}</h5>
+    <h2 class="card-header">{{titulo}}</h2>
     <div class="card-body">
         <button class="btn btn-primary my-2" routerLink="/alumnos/form">Crear Nuevo</button>
-        <div class="alert alert-info" *ngIf="alumnos?.length===0">
+        <div class="alert alert-info" *ngIf="lista?.length===0">
             No hay alumnos en el sistema
         </div>
-        <table class="table table-hover table-stiped" *ngIf="alumnos?.length>0">
+        <table class="table table-hover table-stiped" *ngIf="lista?.length>0">
             <thead>
                 <tr>
                     <th>id</th>
+                    <th>foto</th>
                     <th>nombre</th>
                     <th>apellido</th>
                     <th>email</th>
@@ -18,8 +19,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let alumno of alumnos">
+                <tr *ngFor="let alumno of lista">
                     <td>{{alumno.id}}</td>
+                    <td><img *ngIf="alumno.fotoHashCode" [src]="baseEndpoint+alumno.id + '?fotoHashCode=' + alumno.fotoHashCode" class="img-thumbnail rouded" style="width: 64px; cursor: pointer">
+                        <img *ngIf="!alumno.fotoHashCode" src="/assets/images/no-image.png" class="img-thumbnail rouded" style="width: 64px; cursor: pointer">
+                    </td>
                     <td>{{alumno.nombre }}</td>
                     <td>{{alumno.apellido}}</td>
                     <td>{{alumno.email}}</td>

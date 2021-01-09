@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from '../../models/alumno';
 import { AlumnoService } from '../../services/alumno.service';
+import { CommonFormComponent } from '../common-form.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,67 +10,80 @@ import Swal from 'sweetalert2';
   templateUrl: './alumnos-form.component.html',
   styleUrls: ['./alumnos-form.component.css']
 })
-export class AlumnosFormComponent implements OnInit {
+export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoService> implements OnInit {
 
-  titulo = "Crear Alumnos";
-  alumno: Alumno = new Alumno();
-  error:any;
+  private fotoSeleccionada: File;
 
-  constructor(private service: AlumnoService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+  constructor(service: AlumnoService,
+    router: Router,
+    route: ActivatedRoute) {
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      console.log(params);
-      const id:number = +params.id;
-      console.log(id);
-      if(id){
-        this.service.ver(id).subscribe(alumno => this.alumno = alumno);
-      }
-    });
+    super(service, router, route);
+    this.titulo = 'Crear Alumnos';
+    this.model = new Alumno();
+    this.nombreModel = Alumno.name;
+    this.redirect = '/alumnos';
   }
 
-  crear() :void{
-    // console.log(this.alumno);
-    this.service.crear(this.alumno).subscribe(
-      alumno => {
-        console.log(alumno);
-        Swal.fire(
-          'Creado!',
-          `Alumno ${alumno.nombre} creado con éxito!`,
-          'success'
-        );
-        this.router.navigate(['/alumnos']);
-      },
-      err => {
-        if(err.status === 400){
-          this.error = err.error;
-          console.error(this.error);
-        }
-      }
-    );
+  public seleccionarFoto(event): void {
+    this.fotoSeleccionada = event.target.files[0];
+    console.info(this.fotoSeleccionada);
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      this.fotoSeleccionada = null;
+      Swal.fire('Error al seleccionar la foto:', 'El archivo debe ser del tipo imagen', 'error');
+    }
+    if (this.fotoSeleccionada.size > 1024000) {
+      this.fotoSeleccionada = null;
+      Swal.fire('Error al seleccionar la foto:', 'El archivo debe pesar menos de 1024KB', 'error');
+    }
   }
 
-  editar() :void{
-    // console.log(this.alumno);
-    this.service.editar(this.alumno).subscribe(
-      alumno => {
-        console.log(alumno);
-        Swal.fire(
-          'Actualizado!',
-          `Alumno ${alumno.nombre} actualizado con éxito!`,
-          'success'
-        );
-        this.router.navigate(['/alumnos']);
-      },
-      err => {
-        if(err.status === 400){
-          this.error = err.error;
-          console.error(this.error);
+  crear(): void {
+    if (!this.fotoSeleccionada) {
+      super.crear();
+    } else {
+      // console.log(this.alumno);
+      this.service.crearConFoto(this.model, this.fotoSeleccionada).subscribe(
+        alumno => {
+          Swal.fire(
+            'Creado!',
+            `${this.nombreModel} ${alumno.nombre} creado con éxito!`,
+            'success'
+          );
+          this.router.navigate([this.redirect]);
+        },
+        err => {
+          if (err.status === 400) {
+            this.error = err.error;
+            console.error(this.error);
+          }
         }
-      }
-    );
+      );
+    }
+  }
+
+  editar(): void {
+    if (!this.fotoSeleccionada) {
+      super.editar();
+    } else {
+      // console.log(this.alumno);
+      this.service.editarConFoto(this.model, this.fotoSeleccionada).subscribe(
+        alumno => {
+          Swal.fire(
+            'Modificado!',
+            `${this.nombreModel} ${alumno.nombre} modificado con éxito!`,
+            'success'
+          );
+          this.router.navigate([this.redirect]);
+        },
+        err => {
+          if (err.status === 400) {
+            this.error = err.error;
+            console.error(this.error);
+          }
+        }
+      );
+    }
   }
 
 }

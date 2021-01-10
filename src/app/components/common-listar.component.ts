@@ -35,7 +35,7 @@ export abstract class CommonListarComponent<E extends Generic, S extends CommonS
       p => {
         this.lista = p.content as E[];
         this.totalRegistros = p.totalElements as number;
-        this.paginator?._intl.itemsPerPageLabel = 'Registros por página';
+        this.paginator._intl.itemsPerPageLabel = 'Registros por página';
       }
     );
   }

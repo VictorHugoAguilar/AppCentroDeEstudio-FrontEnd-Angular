@@ -5,13 +5,14 @@ import { Generic } from '../models/generic';
 
 export abstract class CommonService<E extends Generic>{
 
-    protected baseEndpoint: string;
+    protected baseEndpoint: string = '';
+
+    constructor(protected http: HttpClient) { }
 
     protected cabeceras: HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json'
     });
 
-    constructor(protected http: HttpClient) { }
 
     public listar(): Observable<E[]> {
         return this.http.get<E[]>(this.baseEndpoint);

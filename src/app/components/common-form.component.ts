@@ -7,11 +7,11 @@ import { Generic } from '../models/generic';
 
 export abstract class CommonFormComponent<E extends Generic, S extends CommonService<E>> implements OnInit {
 
-  protected titulo: string='';
+  protected titulo: string = '';
   protected model: E;
   protected error: any;
-  protected nombreModel: string='';
-  protected redirect: string='';
+  protected nombreModel: string = '';
+  protected redirect: string = '';
 
   constructor(protected service: S,
     protected router: Router,
@@ -21,7 +21,10 @@ export abstract class CommonFormComponent<E extends Generic, S extends CommonSer
     this.route.params.subscribe(params => {
       const id: number = +params.id;
       if (id) {
-        this.service.ver(id).subscribe(m => this.model = m);
+        this.service.ver(id).subscribe(m => {
+          this.model = m;
+          this.titulo = 'Editar ' + this.nombreModel;
+        });
       }
     });
   }

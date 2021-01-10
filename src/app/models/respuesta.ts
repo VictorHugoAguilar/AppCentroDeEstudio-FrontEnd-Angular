@@ -2,8 +2,8 @@ import { Alumno } from './alumno';
 import { Pregunta } from './pregunta';
 
 export class Respuesta {
-    id: string;
-    texto: string;
+    id: string = 0;
+    texto: string = '';
     alumno: Alumno;
-    pregunta: Pregunta;
+    pregunta: Pregunta ;
 }

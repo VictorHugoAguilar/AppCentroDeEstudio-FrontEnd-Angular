@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoService> implements OnInit {
 
-  private fotoSeleccionada: File;
+  private fotoSeleccionada!: File;
 
   constructor(service: AlumnoService,
     router: Router,
@@ -25,17 +25,18 @@ export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoServ
     this.redirect = '/alumnos';
   }
 
-  public seleccionarFoto(event): void {
-    this.fotoSeleccionada = event.target.files[0];
-    console.info(this.fotoSeleccionada);
+  public seleccionarFoto(event: { target: { files: File[]; }; }): void {
+    let fichero: any = event.target.files[0];
+    console.log(this.fotoSeleccionada);
     if (this.fotoSeleccionada.type.indexOf('image') < 0) {
-      this.fotoSeleccionada = null;
+      fichero = null;
       Swal.fire('Error al seleccionar la foto:', 'El archivo debe ser del tipo imagen', 'error');
     }
     if (this.fotoSeleccionada.size > 1024000) {
-      this.fotoSeleccionada = null;
+      fichero = null;
       Swal.fire('Error al seleccionar la foto:', 'El archivo debe pesar menos de 1024KB', 'error');
     }
+    this.fotoSeleccionada = fichero;
   }
 
   crear(): void {

@@ -12,8 +12,9 @@ import { AlumnosFormComponent } from './components/alumnos/alumnos-form.componen
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CursoFormComponent } from './components/cursos/curso-form.component';
+import { ExamenFormComponent } from './components/examenes/examen-form.component';
 
 
 
@@ -25,6 +26,7 @@ import { CursoFormComponent } from './components/cursos/curso-form.component';
     ExamenesComponent,
     AlumnosFormComponent,
     CursoFormComponent,
+    ExamenFormComponent,
   ],
   imports: [
     BrowserModule,

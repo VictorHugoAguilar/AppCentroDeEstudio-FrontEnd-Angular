@@ -1,6 +1,6 @@
 export class Asignatura {
-    id:number;
-    nombre: string;
-    padre: Asignatura;
-    hijos: Asignatura[]=[];
+  id: number = 0;
+  nombre: string = '';
+  padre: Asignatura;
+  hijos: Asignatura[] = [];
 }

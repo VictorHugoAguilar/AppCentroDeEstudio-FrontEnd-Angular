@@ -1,5 +1,5 @@
 export interface Generic {
 
-    id:number;
-    nombre:string;
+  id: number;
+  nombre: string;
 }

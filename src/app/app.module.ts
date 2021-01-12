@@ -9,12 +9,20 @@ import { CursosComponent } from './components/cursos/cursos.component';
 import { ExamenesComponent } from './components/examenes/examenes.component';
 import { LayoutModule } from './layout/layout.module';
 import { AlumnosFormComponent } from './components/alumnos/alumnos-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CursoFormComponent } from './components/cursos/curso-form.component';
 import { ExamenFormComponent } from './components/examenes/examen-form.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { AsignarAlumnosComponent } from './components/cursos/asignar-alumnos.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 
 
@@ -27,6 +35,7 @@ import { ExamenFormComponent } from './components/examenes/examen-form.component
     AlumnosFormComponent,
     CursoFormComponent,
     ExamenFormComponent,
+    AsignarAlumnosComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +45,13 @@ import { ExamenFormComponent } from './components/examenes/examen-form.component
     FormsModule,
     SweetAlert2Module,
     BrowserAnimationsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatCardModule, MatTabsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

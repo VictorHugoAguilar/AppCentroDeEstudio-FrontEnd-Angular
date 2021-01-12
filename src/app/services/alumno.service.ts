@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable    } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Alumno } from '../models/alumno';
 import { CommonService } from './common.service';
 import { BASE_ENDPOINT } from '../config/app';
@@ -33,6 +33,10 @@ export class AlumnoService extends CommonService<Alumno>{
     formData.append('apellido', alumno.apellido);
     formData.append('email', alumno.email);
     return this.http.put<Alumno>(`${this.baseEndpoint}/editar-con-foto/${alumno.id}`, formData);
+  }
+
+  public filtrarPorNombre(nombre: string): Observable<Alumno[]> {
+    return this.http.get<Alumno[]>(`${this.baseEndpoint}/filtrar/${nombre}`);
   }
 
 }

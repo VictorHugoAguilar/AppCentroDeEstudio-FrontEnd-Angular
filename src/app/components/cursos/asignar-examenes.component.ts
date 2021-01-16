@@ -30,7 +30,7 @@ export class AsignarExamenesComponent implements OnInit {
 
   dataSource: MatTableDataSource<Examen>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  pageSizeOptions = [3, 5, 10, 20, 50];
+  pageSizeOptions = [5, 10, 20, 50];
 
   mostrarColumnas = ['nombre', 'asignatura', 'eliminar'];
   mostrarColumnasExamenes = ['id', 'nombre', 'asignaturas', 'eliminar'];
@@ -66,6 +66,25 @@ export class AsignarExamenesComponent implements OnInit {
     return examen ? examen.nombre : '';
   }
 
+
+  private existe(id: number): boolean {
+    let existe = false;
+    this.examenesAsignar.concat(this.examenes)
+      .forEach(e => {
+        if (id === e.id) {
+          existe = true;
+        }
+      });
+    return existe;
+  }
+
+  private iniciarPaginador(): void {
+    this.dataSource = new MatTableDataSource<Examen>(this.examenes);
+    this.dataSource.paginator = this.paginator;
+    this.paginator._intl.itemsPerPageLabel = 'Registros por página';
+  }
+
+
   seleccionarExamen(event: MatAutocompleteSelectedEvent): void {
     const examen = event.option.value as Examen;
 
@@ -80,28 +99,12 @@ export class AsignarExamenesComponent implements OnInit {
         'error'
       );
     }
-
+    // Limpiamos el input
     this.autocompleteControl.setValue('');
     event.option.deselect();
     event.option.focus();
   }
 
-  private existe(id: number): boolean {
-    let existe = false;
-    this.examenesAsignar.concat(this.examenes)
-      .forEach(e => {
-        if (id === e.id) {
-          existe = true;
-        }
-      });
-    return existe;
-  }
-
-  private iniciarPaginador() {
-    this.dataSource = new MatTableDataSource<Examen>(this.examenes);
-    this.dataSource.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = 'Registros por página';
-  }
 
   eliminarDelAsignar(examen: Examen): void {
     this.examenesAsignar = this.examenesAsignar.filter(

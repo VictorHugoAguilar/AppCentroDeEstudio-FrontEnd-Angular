@@ -22,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { AsignarAlumnosComponent } from './components/cursos/asignar-alumnos.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AsignarExamenesComponent } from './components/cursos/asignar-examenes.component';
 
 
 
@@ -36,6 +37,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     CursoFormComponent,
     ExamenFormComponent,
     AsignarAlumnosComponent,
+    AsignarExamenesComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     LayoutModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
     SweetAlert2Module,
     BrowserAnimationsModule,
     MatPaginatorModule,
@@ -50,8 +54,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatCardModule, MatTabsModule,
-    ReactiveFormsModule
+    MatCardModule,
+    MatTabsModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,7 +12,7 @@ import { BASE_ENDPOINT } from 'src/app/config/app';
 })
 export class AlumnosComponent extends CommonListarComponent<Alumno, AlumnoService> implements OnInit {
 
-    baseEndpoint = `${BASE_ENDPOINT}/alumnos/uploads/img/`;
+  baseEndpoint = `${BASE_ENDPOINT}/alumnos/uploads/img/`;
 
   constructor(service: AlumnoService) {
     super(service);
